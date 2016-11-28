@@ -57,9 +57,10 @@ public class SeparatorBasedExportService<E> extends AbstractFlatDataExportServic
 
 		@Override
 		public void write(final String value, final int colIndex) throws Exception {
+			final String retValue = StringUtil.toString(value);
 			if (this.start) {
 				this.start = false;
-				this.dataWriter.write(value.getBytes());
+				this.dataWriter.write(retValue.getBytes());
 				return;
 			}
 			if (colIndex == 0) {
@@ -68,7 +69,7 @@ public class SeparatorBasedExportService<E> extends AbstractFlatDataExportServic
 				this.dataWriter.write(this.separator.getBytes());
 			}
 			this.start = false;
-			this.dataWriter.write(value.getBytes());
+			this.dataWriter.write(retValue.getBytes());
 		}
 	}
 
