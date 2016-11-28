@@ -4,7 +4,7 @@ import java.util.SortedSet;
 
 import com.abhi.exportentity.api.AttributeFormatter;
 import com.abhi.exportentity.api.FlatDataExportService;
-import com.abhi.exportentity.api.SubAttribute;
+import com.abhi.exportentity.api.ComplexAtrribute;
 
 public abstract class AbstractFlatDataExportService<E> extends AbstractExportService<E>
 		implements FlatDataExportService<E> {
@@ -29,9 +29,9 @@ public abstract class AbstractFlatDataExportService<E> extends AbstractExportSer
 	}
 
 	private int handleHeader(final Class<?> type, int colIndex) throws Exception {
-		final SortedSet<EntityAttribute> fieldCache = this.intitializeCache(type);
+		final SortedSet<EntityAttribute> fieldCache = this.getCache().get(type);
 		for (final EntityAttribute entityAttribute : fieldCache) {
-			if (entityAttribute.field.isAnnotationPresent(SubAttribute.class)) {
+			if (entityAttribute.field.isAnnotationPresent(ComplexAtrribute.class)) {
 				colIndex = this.handleHeader(entityAttribute.field.getType(), colIndex);
 			} else {
 				this.lineWriterProvider.getHeaderWriter().write(entityAttribute.attribute.headerLabel(), colIndex++);
@@ -52,9 +52,9 @@ public abstract class AbstractFlatDataExportService<E> extends AbstractExportSer
 	}
 
 	private int handleEntityField(final Class<?> type, int colIndex, final Object entity) throws Exception {
-		final SortedSet<EntityAttribute> fieldCache = this.intitializeCache(type);
+		final SortedSet<EntityAttribute> fieldCache = this.getCache().get(type);
 		for (final EntityAttribute entityAttribute : fieldCache) {
-			if (entityAttribute.field.isAnnotationPresent(SubAttribute.class)) {
+			if (entityAttribute.field.isAnnotationPresent(ComplexAtrribute.class)) {
 				colIndex = this.handleEntityField(entityAttribute.field.getType(), colIndex,
 						entityAttribute.field.get(entity));
 			} else {

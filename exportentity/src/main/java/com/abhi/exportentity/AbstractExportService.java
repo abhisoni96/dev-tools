@@ -1,16 +1,19 @@
 package com.abhi.exportentity;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import com.abhi.exportentity.api.Attribute;
 import com.abhi.exportentity.api.ExportService;
+import com.abhi.exportentity.api.ComplexAtrribute;
 
 public abstract class AbstractExportService<E> implements ExportService<E> {
 
-	private Class<E>					entityType;
-	private SortedSet<EntityAttribute>	cache;
+	private Class<E>									entityType;
+	private Map<Class<?>, SortedSet<EntityAttribute>>	cache;
 
 	public AbstractExportService() {
 
@@ -23,15 +26,20 @@ public abstract class AbstractExportService<E> implements ExportService<E> {
 		return this;
 	}
 
-	protected SortedSet<EntityAttribute> intitializeCache(final Class<?> entityType) {
-		final SortedSet<EntityAttribute> cache = new TreeSet<>();
+	protected Map<Class<?>, SortedSet<EntityAttribute>> intitializeCache(final Class<?> entityType) {
+		final Map<Class<?>, SortedSet<EntityAttribute>> cache = new HashMap<>();
+		final SortedSet<EntityAttribute> attributeCache = new TreeSet<>();
 		final Field[] declaredFields = entityType.getDeclaredFields();
 		for (final Field field : declaredFields) {
+			if (field.isAnnotationPresent(ComplexAtrribute.class)) {
+				cache.putAll(this.intitializeCache(field.getType()));
+			}
 			if (field.isAnnotationPresent(Attribute.class)) {
 				field.setAccessible(true);
-				cache.add(new EntityAttribute(field, field.getAnnotation(Attribute.class)));
+				attributeCache.add(new EntityAttribute(field, field.getAnnotation(Attribute.class)));
 			}
 		}
+		cache.put(entityType, attributeCache);
 		return cache;
 	}
 
@@ -40,7 +48,7 @@ public abstract class AbstractExportService<E> implements ExportService<E> {
 		this.cache = null;
 	}
 
-	protected SortedSet<EntityAttribute> getCache() {
+	protected Map<Class<?>, SortedSet<EntityAttribute>> getCache() {
 		return this.cache;
 	}
 

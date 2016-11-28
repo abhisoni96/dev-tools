@@ -5,8 +5,8 @@ import java.io.FileOutputStream;
 
 import com.abhi.exportentity.api.Attribute;
 import com.abhi.exportentity.api.AttributeFormatter;
+import com.abhi.exportentity.api.ComplexAtrribute;
 import com.abhi.exportentity.api.FlatDataExportService;
-import com.abhi.exportentity.api.SubAttribute;
 import com.abhi.exportentity.impl.Excel2003ExportService;
 import com.abhi.exportentity.impl.SeparatorBasedExportService;
 
@@ -46,7 +46,7 @@ public class AppTest {
 		String	name;
 
 		@Attribute(headerLabel = "Address", order = 1)
-		@SubAttribute
+		@ComplexAtrribute
 		Address	address	= new Address();
 
 		@Attribute(headerLabel = "Age", order = 2, formatter = AgeFormatter.class)
