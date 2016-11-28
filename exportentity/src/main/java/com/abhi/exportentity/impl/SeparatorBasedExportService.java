@@ -42,8 +42,9 @@ public class SeparatorBasedExportService<E> extends AbstractFlatDataExportServic
 	}
 
 	private static class DefaultLineWriter implements LineWriter {
-		String			separator;
+		String		separator;
 		OutputStream	dataWriter;
+		boolean		start	= true;
 
 		public DefaultLineWriter(final String separator, final OutputStream dataWriter) {
 			this.separator = separator;
@@ -56,11 +57,17 @@ public class SeparatorBasedExportService<E> extends AbstractFlatDataExportServic
 
 		@Override
 		public void write(final String value, final int colIndex) throws Exception {
+			if (this.start) {
+				this.start = false;
+				this.dataWriter.write(value.getBytes());
+				return;
+			}
 			if (colIndex == 0) {
 				this.dataWriter.write("\n".getBytes());
 			} else {
 				this.dataWriter.write(this.separator.getBytes());
 			}
+			this.start = false;
 			this.dataWriter.write(value.getBytes());
 		}
 	}
