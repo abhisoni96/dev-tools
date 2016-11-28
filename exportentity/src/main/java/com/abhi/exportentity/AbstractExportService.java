@@ -23,7 +23,7 @@ public abstract class AbstractExportService<E> implements ExportService<E> {
 		return this;
 	}
 
-	private SortedSet<EntityAttribute> intitializeCache(final Class<E> entityType) {
+	protected SortedSet<EntityAttribute> intitializeCache(final Class<?> entityType) {
 		final SortedSet<EntityAttribute> cache = new TreeSet<>();
 		final Field[] declaredFields = entityType.getDeclaredFields();
 		for (final Field field : declaredFields) {
@@ -42,6 +42,10 @@ public abstract class AbstractExportService<E> implements ExportService<E> {
 
 	protected SortedSet<EntityAttribute> getCache() {
 		return this.cache;
+	}
+
+	public Class<E> getEntityType() {
+		return this.entityType;
 	}
 
 	protected static class EntityAttribute implements Comparable<EntityAttribute> {

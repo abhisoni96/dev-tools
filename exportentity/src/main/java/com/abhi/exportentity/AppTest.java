@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import com.abhi.exportentity.api.Attribute;
 import com.abhi.exportentity.api.AttributeFormatter;
 import com.abhi.exportentity.api.FlatDataExportService;
+import com.abhi.exportentity.api.SubAttribute;
 import com.abhi.exportentity.impl.Excel2003ExportService;
 import com.abhi.exportentity.impl.SeparatorBasedExportService;
 
@@ -14,8 +15,11 @@ public class AppTest {
 	public static void main(final String[] args) throws Exception {
 		final Employee e = new Employee();
 		e.name = "Abhishek";
-		e.address = "Indore";
+		e.address.city = "Pune";
+		e.address.street = "Airport Road";
+		e.address.builingNumber = 96;
 		e.age = 28;
+
 		final Employee e2 = new Employee();
 		e2.name = "Soni";
 		e2.address = null;
@@ -42,10 +46,22 @@ public class AppTest {
 		String	name;
 
 		@Attribute(headerLabel = "Address", order = 1)
-		String	address;
+		@SubAttribute
+		Address	address	= new Address();
 
 		@Attribute(headerLabel = "Age", order = 2, formatter = AgeFormatter.class)
 		int		age;
+	}
+
+	public static class Address {
+		@Attribute(headerLabel = "City", order = 0)
+		String	city;
+
+		@Attribute(headerLabel = "Street", order = 1)
+		String	street;
+
+		@Attribute(headerLabel = "Building Number", order = 2)
+		int		builingNumber;
 	}
 
 	public static class AgeFormatter implements AttributeFormatter {
