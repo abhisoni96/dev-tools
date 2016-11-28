@@ -38,7 +38,7 @@ CSV and EXCEL support is already available:
 		String	name;
 
 		@Attribute(headerLabel = "Address", order = 1)
-		@SubAttribute
+		@ComplexAttribute
 		Address	address	= new Address();
 
 		@Attribute(headerLabel = "Age", order = 2, formatter = AgeFormatter.class)
