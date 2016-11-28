@@ -57,7 +57,7 @@ public class Excel2003ExportService<E> extends AbstractFlatDataExportService<E> 
 
 		@Override
 		public void init() {
-			this.row = this.workSheet.createRow(this.workSheet.getLastRowNum() + 1);
+			this.row = this.workSheet.createRow(this.workSheet.getPhysicalNumberOfRows());
 		}
 
 		@Override
