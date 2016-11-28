@@ -7,19 +7,28 @@ CSV and EXCEL support is already available:
 	public static void main(final String[] args) throws Exception {
 		final Employee e = new Employee();
 		e.name = "Abhishek";
-		e.address = "Indore";
+		e.address.city = "Pune";
+		e.address.street = "Airport Road";
+		e.address.builingNumber = 96;
 		e.age = 28;
+
+		final Employee e2 = new Employee();
+		e2.name = "Soni";
+		e2.address = null;
+		e2.age = 23;
 
 		final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		FlatDataExportService<Employee> service = new SeparatorBasedExportService<>("|", Employee.class, outputStream);
 		service.exportHeader();
 		service.export(e);
+		service.export(e2);
 		System.out.println(outputStream.toString());
 		service.release();
 
 		service = new Excel2003ExportService<>(Employee.class, new FileOutputStream("text.xlsx"));
 		service.exportHeader();
 		service.export(e);
+		service.export(e2);
 		service.release();
 	}
 
@@ -29,10 +38,22 @@ CSV and EXCEL support is already available:
 		String	name;
 
 		@Attribute(headerLabel = "Address", order = 1)
-		String	address;
+		@SubAttribute
+		Address	address	= new Address();
 
 		@Attribute(headerLabel = "Age", order = 2, formatter = AgeFormatter.class)
 		int		age;
+	}
+
+	public static class Address {
+		@Attribute(headerLabel = "City", order = 0)
+		String	city;
+
+		@Attribute(headerLabel = "Street", order = 1)
+		String	street;
+
+		@Attribute(headerLabel = "Building Number", order = 2)
+		int		builingNumber;
 	}
 
 	public static class AgeFormatter implements AttributeFormatter {
@@ -44,8 +65,9 @@ CSV and EXCEL support is already available:
 
 **Output:**
 
- Name|Address|Age  
- Abhishek|Indore|28 Years
+Name|City|Street|Building Number|Age  
+Abhishek|Pune|Airport Road|96|28 Years  
+Soni||||23 Years
 
 
 
