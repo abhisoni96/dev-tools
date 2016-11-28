@@ -40,18 +40,18 @@ public abstract class AbstractFlatDataExportService<E> extends AbstractExportSer
 		this.lineWriterProvider.getEntityWriter().init();
 		for (final EntityAttribute field : this.getCache()) {
 			final Object fieldValue = field.field.get(entity);
+			String value = null;
 			if (fieldValue != null) {
 				if (field.attribute.formatter() != null) {
 					formatter = field.attribute.formatter().newInstance();
 				}
-				String value = null;
 				if (formatter != null) {
 					value = formatter.format(fieldValue);
 				} else {
 					value = fieldValue.toString();
 				}
-				this.lineWriterProvider.getEntityWriter().write(value, colIndex++);
 			}
+			this.lineWriterProvider.getEntityWriter().write(value, colIndex++);
 		}
 	}
 
