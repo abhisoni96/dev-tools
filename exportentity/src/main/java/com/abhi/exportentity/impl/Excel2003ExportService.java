@@ -62,7 +62,7 @@ public class Excel2003ExportService<E> extends AbstractFlatDataExportService<E> 
 
 		@Override
 		public void write(final String value, final int colIndex) {
-			this.row.createCell(colIndex).setCellValue(value);
+			this.row.createCell(colIndex).setCellValue(value == null ? "" : value.toString());
 		}
 	}
 
