@@ -16,17 +16,23 @@ public class AppTest {
 		e.name = "Abhishek";
 		e.address = "Indore";
 		e.age = 28;
+		final Employee e2 = new Employee();
+		e2.name = "Soni";
+		e2.address = null;
+		e2.age = 23;
 
 		final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		FlatDataExportService<Employee> service = new SeparatorBasedExportService<>("|", Employee.class, outputStream);
 		service.exportHeader();
 		service.export(e);
+		service.export(e2);
 		System.out.println(outputStream.toString());
 		service.release();
 
 		service = new Excel2003ExportService<>(Employee.class, new FileOutputStream("text.xlsx"));
 		service.exportHeader();
 		service.export(e);
+		service.export(e2);
 		service.release();
 	}
 
