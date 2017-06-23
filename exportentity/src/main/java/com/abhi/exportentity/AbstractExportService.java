@@ -22,19 +22,20 @@ public abstract class AbstractExportService<E> implements ExportService<E> {
 	@Override
 	public ExportService<E> initialize(final Class<E> entityType) {
 		this.entityType = entityType;
-		this.cache = this.intitializeCache(this.entityType);
+		this.cache = this.initializeCache(this.entityType);
 		return this;
 	}
 
-	protected Map<Class<?>, SortedSet<EntityAttribute>> intitializeCache(final Class<?> entityType) {
+	protected Map<Class<?>, SortedSet<EntityAttribute>> initializeCache(final Class<?> entityType) {
 		final Map<Class<?>, SortedSet<EntityAttribute>> cache = new HashMap<>();
 		final SortedSet<EntityAttribute> attributeCache = new TreeSet<>();
 		final Field[] declaredFields = entityType.getDeclaredFields();
 		for (final Field field : declaredFields) {
 			if (field.isAnnotationPresent(ComplexAtrribute.class)) {
-				cache.putAll(this.intitializeCache(field.getType()));
+				cache.putAll(this.initializeCache(field.getType()));
 			}
 			if (field.isAnnotationPresent(Attribute.class)) {
+				// TODO: Remove below code of set accessible every field in enitites...
 				field.setAccessible(true);
 				attributeCache.add(new EntityAttribute(field, field.getAnnotation(Attribute.class)));
 			}
