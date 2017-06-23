@@ -12,14 +12,9 @@
 	<name>Export Entity</name>
 	<description>Application to export java entity to various formats excel, csv etc.</description>
 	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
@@ -27,12 +22,4 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>
