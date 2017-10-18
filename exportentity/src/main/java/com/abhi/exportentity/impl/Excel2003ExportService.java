@@ -19,13 +19,13 @@ public class Excel2003ExportService<E> extends AbstractFlatDataExportService<E> 
 	private static class DefaultLineWriterProvider implements LineWriterProvider {
 		LineWriter		lineWriter;
 		LineWriter		headerWriter;
-		XSSFWorkbook	woorkBook;
+		XSSFWorkbook	workBook;
 		OutputStream	outputStream;
 
 		public DefaultLineWriterProvider(final OutputStream outputStream) {
 			this.outputStream = outputStream;
-			this.woorkBook = new XSSFWorkbook();
-			final XSSFSheet workSheet = this.woorkBook.createSheet();
+			this.workBook = new XSSFWorkbook();
+			final XSSFSheet workSheet = this.workBook.createSheet();
 			this.lineWriter = new DefaultLineWriter(workSheet, false);
 			this.headerWriter = new DefaultLineWriter(workSheet, true);
 		}
@@ -47,7 +47,9 @@ public class Excel2003ExportService<E> extends AbstractFlatDataExportService<E> 
 
 		@Override
 		public void release() throws Exception {
-			this.woorkBook.write(this.outputStream);
+			this.workBook.write(this.outputStream);
+			this.workBook.close();
+			this.outputStream.close();
 		}
 	}
 

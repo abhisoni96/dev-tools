@@ -37,7 +37,7 @@ public class SeparatorBasedExportService<E> extends AbstractFlatDataExportServic
 
 		@Override
 		public void release() throws Exception {
-			// this.outputStream.close();
+			 this.outputStream.close();
 		}
 	}
 
