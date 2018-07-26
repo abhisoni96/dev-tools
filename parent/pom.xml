@@ -9,6 +9,7 @@
 
 	<modules>
 		<module>../exportentity</module>
+		<module>../perfmetricstool</module>
 	</modules>
 
 	<properties>
