@@ -1,8 +1,9 @@
-# Dev Tools  
-[Export Entity](#exportEntity)  
-[Performance Metrics Generator](#perfMetrics)  
+# Dev Tools
+**[Export Entity](#exportEntity)**<br>
+**[Performance Metrics Generator](#perfMetrics)**<br>
    
 <a name="exportEntity"/>
+
 ## Export Entity
 Export Java entities to various formats like Excel, CSV etc. Framework should be extensible easily for new formats.
 
@@ -74,6 +75,7 @@ Abhishek|Pune|Airport Road|96|28 Years
 Soni||||23 Years
 
 <a name="perfMetrics"/>
+
 ## Performance Metrics Generator
 Generic tool to generate performance metrics from any application logs. User can define template in tool to describe all internal activity steps which needs to be part of performance metrics.
 
