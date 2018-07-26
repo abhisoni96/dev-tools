@@ -1,7 +1,12 @@
-# Export-Entity
+# Dev Tools  
+[Export Entity](#exportEntity)  
+[Performance Metrics Generator](#perfMetrics)  
+   
+<a name="exportEntity"/>
+## Export Entity
 Export Java entities to various formats like Excel, CSV etc. Framework should be extensible easily for new formats.
 
-CSV and EXCEL support is already available: 
+#### CSV and EXCEL support is already available: 
 -----------------------
 
 	public static void main(final String[] args) throws Exception {
@@ -63,11 +68,16 @@ CSV and EXCEL support is already available:
 		}
 	}
 
-**Output:**
-
+#### Output:
 Name|City|Street|Building Number|Age  
 Abhishek|Pune|Airport Road|96|28 Years  
 Soni||||23 Years
 
+<a name="perfMetrics"/>
+## Performance Metrics Generator
+Generic tool to generate performance metrics from any application logs. User can define template in tool to describe all internal activity steps which needs to be part of performance metrics.
 
+#### Assumptions:
+Application logs will have start and end logs for all internal activity steps with timestamp.
 
+#### Note: Still in development 
