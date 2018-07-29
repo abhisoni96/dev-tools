@@ -1,4 +1,4 @@
-package com.abhi.tools.perfmetrics;
+package com.abhi.perfmetricstool.core;
 
 /**
  * Hello world!

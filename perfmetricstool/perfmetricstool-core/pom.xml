@@ -7,17 +7,19 @@
 
 	<parent>
 		<groupId>com.abhi</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>perfmetricstool</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../parent</relativePath>
+		<relativePath>./perfmetricstool</relativePath>
 	</parent>
 
-	<artifactId>perfmetricstool</artifactId>
-	<name>perfmetricstool</name>
-	<description>Generic log analyzer to generate performance metrics</description>
-	<packaging>pom</packaging>
+	<artifactId>perfmetricstool-core</artifactId>
+	<name>perfmetricstool-core</name>
 
-	<modules>
-		<module>perfmetricstool-core</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>com.abhi</groupId>
+			<artifactId>exportentity</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
