@@ -9,7 +9,7 @@
 		<groupId>com.abhi</groupId>
 		<artifactId>perfmetricstool</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>./perfmetricstool</relativePath>
+		<relativePath>../perfmetricstool</relativePath>
 	</parent>
 
 	<artifactId>perfmetricstool-core</artifactId>

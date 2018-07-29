@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.abhi</groupId>
-	<artifactId>parent</artifactId>
+	<artifactId>dev-tools</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Parent Project</name>
+	<name>dev-tools</name>
 
 	<modules>
 		<module>exportentity</module>

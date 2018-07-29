@@ -4,13 +4,12 @@
 
 	<parent>
 		<groupId>com.abhi</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>dev-tools</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>./parent</relativePath>
 	</parent>
 
 	<artifactId>exportentity</artifactId>
-	<name>Export Entity</name>
+	<name>exportentity</name>
 	<description>Application to export java entity to various formats excel, csv etc.</description>
 	<packaging>jar</packaging>
 
