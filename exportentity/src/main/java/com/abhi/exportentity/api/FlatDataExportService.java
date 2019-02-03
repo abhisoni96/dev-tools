@@ -1,27 +1,31 @@
 package com.abhi.exportentity.api;
 
+import java.util.List;
+
 public interface FlatDataExportService<E> extends ExportService<E> {
 
-	void setLineWriterProvider(LineWriterProvider lineWriterProvider);
+    void setLineWriterProvider(LineWriterProvider lineWriterProvider);
 
-	void exportHeader() throws Exception;
+    void exportHeader() throws Exception;
 
-	void exportFooter() throws Exception;
+    void exportHeader(List<String> customHeaders, boolean isAppend) throws Exception;
 
-	public static interface LineWriter {
+    void exportFooter() throws Exception;
 
-		void init() throws Exception;
+    public static interface LineWriter {
 
-		void write(String value, int colIndex) throws Exception;
-	}
+        void init() throws Exception;
 
-	public static interface LineWriterProvider {
-		LineWriter getHeaderWriter();
+        void write(String value, int colIndex) throws Exception;
+    }
 
-		LineWriter getEntityWriter();
+    public static interface LineWriterProvider {
+        LineWriter getHeaderWriter();
 
-		LineWriter getFooterWriter();
+        LineWriter getEntityWriter();
 
-		void release() throws Exception;
-	}
+        LineWriter getFooterWriter();
+
+        void release() throws Exception;
+    }
 }

@@ -3,11 +3,12 @@
  */
 package com.abhi.exportentity.api;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import java.util.Objects;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME)
 @Target(FIELD)
@@ -16,16 +17,16 @@ import java.lang.annotation.Target;
  *
  */
 public @interface Attribute {
-	String headerLabel();
+    String headerLabel();
 
-	Class<? extends AttributeFormatter> formatter() default DefaultAttributeFormatter.class;
+    Class<? extends AttributeFormatter> formatter() default DefaultAttributeFormatter.class;
 
-	int order();
+    int order() default 0;
 
-	public static class DefaultAttributeFormatter implements AttributeFormatter {
-		@Override
-		public String format(final Object object) {
-			return object == null ? "" : object.toString();
-		}
-	}
+    class DefaultAttributeFormatter implements AttributeFormatter {
+        @Override
+        public String format(final Object object) {
+            return Objects.toString(object, "");
+        }
+    }
 }
